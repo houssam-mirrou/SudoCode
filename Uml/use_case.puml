@@ -1,0 +1,29 @@
+@startuml Code-judge
+
+actor Guest
+actor User
+actor Admin
+
+Guest --> (Register)
+Guest --> (Login)
+Guest --> (View Problems)
+Guest --> (View Problem Details)
+
+User --> (Submit Solution)
+User --> (View Submission History)
+User --> (View Submission Status)
+User --> (View Profile)
+User --> (View Ranking)
+
+Admin --> (Create Problem)
+Admin --> (Edit Problem)
+Admin --> (Delete Problem)
+Admin --> (Manage Test Cases)
+Admin --> (Manage Languages)
+Admin --> (View All Submissions)
+Admin --> (Manage Users)
+
+User --|> Guest
+Admin --|> User
+
+@enduml

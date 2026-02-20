@@ -1,0 +1,51 @@
+@startuml classes
+
+class User {
+  id: int
+  name: string
+  email: string
+  password: string
+  role: string
+  score: int
+}
+
+class Problem {
+  id: int
+  title: string
+  description: text
+  difficulty: string
+  time_limit: int
+  memory_limit: int
+}
+
+class TestCase {
+  id: int
+  input: text
+  expected_output: text
+  is_hidden: boolean
+}
+
+class Submission {
+  id: int
+  code: text
+  status: string
+  verdict: string
+  execution_time: float
+  memory_used: int
+}
+
+class Language {
+  id: int
+  name: string
+  docker_image: string
+  compile_command: string
+  run_command: string
+}
+
+User "1" --> "0..*" Submission
+Problem "1" --> "0..*" Submission
+Problem "1" --> "1..*" TestCase
+Submission --> Language
+Problem --> User : created_by
+
+@enduml
