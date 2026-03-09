@@ -11,6 +11,18 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: codejudge-pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@codejudge.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+    depends_on:
+      - postgres
 
   redis:
     image: redis:7-alpine
@@ -40,6 +52,7 @@ services:
       REDIS_HOST: redis
     ports:
       - "8000:80"
+    command: sh -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache && service nginx start && php-fpm"
 
   frontend:
     build:
